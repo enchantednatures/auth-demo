@@ -176,7 +176,7 @@ async fn login_authorized(
     let client = reqwest::Client::new();
     let user  = client
         // https://discord.com/developers/docs/resources/user#get-current-user
-        .get(env!("USERINFO_URL"))
+        .get(env::var("USERINFO_URL").expect("USERINFO_URL must be defined"))
         .bearer_auth(token.access_token().secret())
         .send()
         .await
